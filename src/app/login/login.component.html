@@ -1,27 +1,44 @@
 <div class="container">
     <div class="text-center">
-        <img src="assets/logogym.PNG" alt="">
+        <img  src="assets/logogym.PNG" class="rounded-circle" alt="" width="200" height="200">
         <h3>Bienvenido, por favor ingrese sus datos</h3>
     </div>
     
-    <div class="card">
+    <div class="text-center" style="width: 300px; margin-left: auto; margin-right: auto;">
+      <div class="card" >
         <div class="card-body">
-            <form>
+            <form [formGroup] ="formularioLogin">
                 <div class="form-group">
                   <label for="email">Correo electronico</label>
-                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
+                  <input type="email" (keyUp.enter)="ingresar()" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
+                  <div *ngIf="formularioLogin.controls['email'].invalid && formularioLogin.controls['email'].dirty" class="alert alert-danger" role="alert">
+                    <span *ngIf="formularioLogin.controls['email'].errors.required" >El correo es requerido</span> 
+                    <span *ngIf="formularioLogin.controls['email'].errors.email" >El correo no es valido</span>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
+                  <label for="password">Contraseña</label>
+                  <input type="password" (keyUp.enter)="ingresar()" class="form-control" id="password" formControlName="password" placeholder="Ingrese su contraseña">
+                  <div *ngIf="formularioLogin.controls['password'].invalid && formularioLogin.controls['password'].dirty" class="alert alert-danger" role="alert">
+                    <span *ngIf="formularioLogin.controls['password'].errors.required" >La constraseña es requeridar</span> 
+                  </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Ingresar</button>
+                <div class="text-center">
+                  <button type="submit" (click)="ingresar()" [disabled]="!formularioLogin.valid" class="btn btn-primary">Ingresar</button>
+                </div>
+                
                 <div class="text-center">
                   <p class="mt-5 mb-3 text-muted">&copy; Valentina company</p>
                 </div>
               </form>
+              <div *ngIf="!datosCorrectos" class="alert alert-warning" role="alert">
+                {{textoError}}
+              </div>
         </div>
     </div>
+    </div>
+
+   
     
 </div>

@@ -11,9 +11,9 @@ export class AppComponent {
   title = 'mastergym';
   usuario: User;
   cargando: boolean = true;
-  constructor(public auth: AngularFireAuth)
+  constructor(private afAuth: AngularFireAuth)
   {
-    this.auth.user.subscribe((usuario)=>{
+    this.afAuth.user.subscribe((usuario)=>{
     setTimeout(()=>{
       this.cargando = false;
       this.usuario = usuario;
@@ -23,9 +23,9 @@ export class AppComponent {
     })
   }
   login() {
-    this.auth.signInWithEmailAndPassword('valen@gmail.com', '123456');
+    this.afAuth.signInWithEmailAndPassword('valen@gmail.com', '123456');
   }
   logout() {
-    this.auth.signOut();
+    this.afAuth.signOut();
 }
 }
