@@ -1,10 +1,10 @@
 <div class="container">
     <div class="text-center">
         <img  src="assets/logogym.PNG" class="rounded-circle" alt="" width="200" height="200">
-        <h3>Bienvenido, por favor ingrese sus datos</h3>
+        <h5>Bienvenido, por favor ingrese sus datos</h5>
     </div>
     
-    <div class="text-center" style="width: 300px; margin-left: auto; margin-right: auto;">
+    <div class="text-center sombra" style="width: 300px; margin-left: auto; margin-right: auto;">
       <div class="card" >
         <div class="card-body">
             <form [formGroup] ="formularioLogin">
@@ -34,11 +34,13 @@
               </form>
               <div *ngIf="!datosCorrectos" class="alert alert-warning" role="alert">
                 {{textoError}}
-              </div>
+              </div>             
         </div>
     </div>
     </div>
 
-   
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "fire" [fullScreen] = "true"><p style="color: white" > Ingresando a MasterGym... </p></ngx-spinner>  
+
+    
     
 </div>

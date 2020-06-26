@@ -24,6 +24,7 @@
     "firebase": "^7.15.4",
     "ng": "0.0.0",
     "ngx-bootstrap": "^5.6.1",
+    "ngx-spinner": "^9.0.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
