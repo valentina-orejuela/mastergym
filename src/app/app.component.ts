@@ -22,10 +22,5 @@ export class AppComponent {
    
     })
   }
-  login() {
-    this.afAuth.signInWithEmailAndPassword('valen@gmail.com', '123456');
-  }
-  logout() {
-    this.afAuth.signOut();
-}
+ 
 }

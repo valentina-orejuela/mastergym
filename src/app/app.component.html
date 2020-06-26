@@ -1,6 +1,5 @@
 <div *ngIf=" usuario && !cargando; else showLogin">
-  <h1>Hello {{ usuario.email }}</h1>
-  <button (click)="logout()">Logout</button>
+  <app-encabezado></app-encabezado> <router-outlet></router-outlet>
 </div>
 
 
@@ -13,4 +12,3 @@
 
 
 
-<router-outlet></router-outlet>
