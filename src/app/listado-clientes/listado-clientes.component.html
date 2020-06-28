@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <h4>Listado de Clientes</h4>
+
+    <form action="">
+        <div class="form-group">
+            <input class="form-control mr-sm-2" type="search" placeholder="Busque un cliente aqui" aria-label="Search">
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-sm-3 mr-3 mt-5"*ngFor="let cliente of clientes" >
+            <div class="card">
+                <img class="card-img-top" [src]="cliente.ImgUrl"  alt="...">
+                <div class="card-body">
+                    <p>{{cliente.id}}</p>
+                    <h5 class="card-title">{{cliente.nombre}} {{cliente.Apellido}} </h5>
+                    <a class="card-link">Editar</a>
+                    <a class="card-link text-danger">Desactivar</a>
+                </div>
+            </div>
+                
+        </div>
+        
+        
+    </div>
+
+</div>
+
