@@ -19,6 +19,8 @@ import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.compo
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
   ],
   providers: [
     AngularFireAuth,
-    AngularFirestore
+    AngularFirestore,
   ],
   bootstrap: [AppComponent]
 })
