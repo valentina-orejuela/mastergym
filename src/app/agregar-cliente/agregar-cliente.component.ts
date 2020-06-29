@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { MensajesService } from '../services/mensajes.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class AgregarClienteComponent implements OnInit {
     private fb: FormBuilder, 
     private storage: AngularFireStorage, 
     private db: AngularFirestore, 
-    private activeRoute: ActivatedRoute) { }
+    private activeRoute: ActivatedRoute,
+    private msj: MensajesService) { }
 
   ngOnInit(): void {
 
@@ -44,8 +46,7 @@ export class AgregarClienteComponent implements OnInit {
     if (this.id != undefined) 
     {
       this.esEditable = true;
-      this.db.doc<any>('clientes'+ '/' + this.id).valueChanges().subscribe((cliente)=> /* Leo en la base de datos el cliente con la id dada */
-    
+      this.db.doc<any>('clientes'+ '/' + this.id).valueChanges().subscribe((cliente)=> /* Leo en la base de datos el cliente con la id dada */   
     {
       console.log(cliente) 
       this.formularioCliente.setValue({ 
@@ -59,7 +60,7 @@ export class AgregarClienteComponent implements OnInit {
         
       })
 
-      this.urlImagen = cliente.imgUrl; /* El formato imagen se debe definir así */
+      this.urlImagen = cliente.ImgUrl; /* El formato imagen se debe definir así */
 
     });
     } 
@@ -71,20 +72,20 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento)
     console.log(this.formularioCliente.value);
     this.db.collection('clientes').add(this.formularioCliente.value).then((termino)=>{
-      // this.msj.mensajeCorrecto('Agregar',('Se agregó correctamente')) 
+      this.msj.mensajeCorrecto('Agregar',('Se agregó correctamente')) ;
       this.formularioCliente.reset(); 
     })
   }
 
   editar()
   {
-    this.formularioCliente.value.imgUrl = this.urlImagen /* Asginamos a la variable del formulario la URL de la imagen de la BD */
+    this.formularioCliente.value.ImgUrl = this.urlImagen /* Asginamos a la variable del formulario la URL de la imagen de la BD */
     this.formularioCliente.value.fechaNacimiento = new Date (this.formularioCliente.value.fechaNacimiento) /* Damos el formato a la fecha de string a date */
-    // this.db.doc('clientes/' + this.id).update(this.formularioCliente.value).then((resultado)=>{
-    //   this.msj.mensajeCorrecto('Editar',('Se editó correctamente')) /* Invoco servicio de correcto de SWEETALERT de mensaje correcto */
-    // }).catch(()=>{
-    //   this.msj.mensajeError('Error',('Ocurrió algun error')) /* Invoco servicio de error de SWEETALERT de mensaje correcto */
-    // })
+    this.db.doc('clientes/' + this.id).update(this.formularioCliente.value).then((resultado)=>{
+      this.msj.mensajeCorrecto('Editar',('Se editó correctamente')); 
+    }).catch(()=>{
+      this.msj.mensajeError('Error',('Ocurrió algun error')); 
+    })
   }
 
   subirImagen(evento)

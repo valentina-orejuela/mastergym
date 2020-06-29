@@ -85,8 +85,8 @@
 
         <br><br>
 
-        <button class="btn btn-primary" [disabled]="formularioCliente.invalid" (click)="agregar()">Agregar</button>
-        <button class="btn btn-primary" [disabled]="formularioCliente.invalid" (click)="editar()">Editar</button>
+        <button class="btn btn-primary" *ngIf="!esEditable" [disabled]="formularioCliente.invalid && !urlImagen" (click)="agregar()">Agregar</button>
+        <button class="btn btn-danger ml-2" *ngIf="esEditable" [disabled]="formularioCliente.invalid && !urlImagen" (click)="editar()">Editar</button>
 
         
 
