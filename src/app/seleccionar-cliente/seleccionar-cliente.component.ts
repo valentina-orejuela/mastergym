@@ -17,12 +17,21 @@ export class SeleccionarClienteComponent implements OnInit {
       this.clientes.length = 0;
       resultado.docs.forEach((item)=>{
         let cliente: any = item.data();
+        cliente.id = item.id;
         cliente.ref = item.ref;
+        cliente.visible = false;
         this.clientes.push(cliente);
       })
+
       console.log(this.clientes);
       
     })
   }
+
+  buscarClientes(nombre: string){
+    console.log(nombre);
+    
+  }
+
 
 }
