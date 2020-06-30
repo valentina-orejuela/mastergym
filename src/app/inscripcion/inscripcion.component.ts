@@ -22,6 +22,14 @@ clienteSeleccionado: Cliente = new Cliente(); /* Variable que guardara el client
   constructor(private db: AngularFirestore, private msj: MensajesService) { }
 
   ngOnInit(): void {
+    this.db.collection('precios').get().subscribe((resultados)=>{ /* Consultamos en la coleccion precios de la DB */
+      resultados.docs.forEach((item)=>{
+        let precio = item.data() as Precio;
+        precio.id = item.id; 
+        precio.ref = item.ref; 
+        this.precios.push(precio); /* Almaceno la variable local al array ya creado */
+      })
+    })
   }
 
   asignarCliente(cliente: Cliente) /* Funcion que asigna el cliente seleccionado a la inscripcion */
