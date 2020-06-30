@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Cliente } from '../models/cliente';
 
@@ -9,6 +9,9 @@ import { Cliente } from '../models/cliente';
 })
 export class SeleccionarClienteComponent implements OnInit {
    clientes: Cliente[] = new Array<Cliente>();
+   @Input('nombre') nombre : string;
+   @Output('seleccionoCliente') seleccionoCliente = new EventEmitter();
+   @Output('canceloCliente') canceloCliente = new EventEmitter();
 
   constructor(private db: AngularFirestore) { }
 
@@ -29,9 +32,32 @@ export class SeleccionarClienteComponent implements OnInit {
   }
 
   buscarClientes(nombre: string){
-    console.log(nombre);
+    this.clientes.forEach((cliente)=>{
+      if(cliente.nombre.toLowerCase().includes(nombre)){
+        cliente.visible = true;
+      }
+      else{
+        cliente.visible = false; 
+      }
+    })
     
   }
+
+
+  seleccionarCliente(cliente:Cliente) /* Funcion que se ejecuta al darle click a un cliente */
+  {
+    this.nombre = cliente.nombre + ' ' + cliente.apellido /* Carga la variable global con el nombre y apellido del cliente */
+    this.clientes.forEach((cliente)=>{ //Codigo para borrar los clientes de la lista una vez se ha escogido uno
+      cliente.visible = false;
+    })
+    this.seleccionoCliente.emit(cliente) /* Variable creada para que otro componente se suscriba */
+  }
+
+  cancelarCliente(){ /* Funcion que ejecuta el boton CANCELAR */
+    this.nombre = undefined; /* Borro el contenido del input */
+    this.canceloCliente.emit();
+  }
+
 
 
 }
